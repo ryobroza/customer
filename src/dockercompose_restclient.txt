@@ -1,0 +1,45 @@
+#services:
+#  mysql:
+#    container_name: sqlserver
+#    image: mysql
+#    ports:
+#      - 3306:3306
+#    networks:
+#      - customer_network
+#      - carrent_network
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_DATABASE=customer
+#      - MYSQL_DATABASE=car_rent
+#
+#  customer_app:
+#    depends_on:
+#      - mysql
+#    container_name: customer-api
+#    image: customer:1.0
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - customer_network
+#    environment:
+#      - jwt_secret=veryLongAndSecureKey123456789lalalala
+#      - HOST=sqlserver
+#
+#  carrent_app:
+#    depends_on:
+#      - mysql
+#    container_name: carrent-api
+#    image: carrent:1.0
+#    ports:
+#      - 8081:8080
+#    networks:
+#      - carrent_network
+##    environment:
+##      - jwt_secret=anotherVeryLongAndSecureKey123456789lalalala
+##      - HOST=sqlserver
+#
+#networks:
+#  customer_network:
+#    name: customer_network
+#  carrent_network:
+#    name: carrent_network

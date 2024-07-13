@@ -1,0 +1,18 @@
+Install Docker
+jalankan docker -v di terminal
+
+docker pull mysql
+docker container create --name sqlserver -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql
+
+bikin Dockerfile di root project ex:customer
+docker build -t customer:1.0 . (jangan lupa spasi titik)
+docker images
+
+docker container create --name customer-api -e HOST=sqlserver -p 8080:8080 customer:1.0
+
+docker network create customer_network
+docker network connect customer_network sqlserver
+docker network connect customer_network customer-api
+
+docker container start customer-api -> jangan lupa create database di sqlserver
+docker exec -it sqlserver mysql -u root -p
